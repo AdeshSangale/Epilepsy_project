@@ -20,3 +20,22 @@ How the workflow behaves
 - If `RENDER_API_KEY` and `RENDER_SERVICE_ID` are present, the workflow posts to the Render API to trigger a deploy.
 
 If you'd like me to fully automate creating a Heroku app or a Render service and set the secrets for you, I can do that — but I will need the corresponding API key (or permission to run the provider's CLI while you authenticate).
+
+## Render: Getting API key and Service ID
+
+1. API Key:
+
+   - Sign in to Render, open the user menu (top-right) → Account → API Keys → "Create an API Key". Copy the value.
+
+2. Service ID:
+   - Open your Render service in the dashboard. The service's UUID appears in the browser URL (after `/services/`) and is the `RENDER_SERVICE_ID` you should use. Alternatively, list services via the Render API:
+
+```bash
+curl -H "Authorization: Bearer $RENDER_API_KEY" https://api.render.com/v1/services
+```
+
+3. Add GitHub repository secrets:
+   - Repository → Settings → Secrets and variables → Actions → New repository secret
+   - Add `RENDER_API_KEY` and `RENDER_SERVICE_ID` with the values obtained above.
+
+After adding the secrets, push to `main` or trigger the workflow manually from the Actions tab to start a deploy.
