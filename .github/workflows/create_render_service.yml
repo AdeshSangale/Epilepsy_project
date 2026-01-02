@@ -1,0 +1,78 @@
+name: Create Render Service (manual)
+
+on:
+  workflow_dispatch:
+    inputs:
+      service_name:
+        description: 'Friendly name for the Render service (optional)'
+        required: false
+        default: ''
+      branch:
+        description: 'Branch to deploy'
+        required: false
+        default: 'main'
+
+jobs:
+  create-service:
+    runs-on: ubuntu-latest
+    permissions: write-all
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Create Render service via API
+        env:
+          RENDER_API_KEY: ${{ secrets.RENDER_API_KEY_FOR_CREATE }}
+          REPO: ${{ github.repository }}
+          BRANCH: ${{ github.event.inputs.branch || 'main' }}
+          SERVICE_NAME_INPUT: ${{ github.event.inputs.service_name }}
+        run: |
+          if [ -z "$RENDER_API_KEY" ]; then
+            echo "Please add a repository secret named RENDER_API_KEY_FOR_CREATE with a Render API key and re-run this workflow.";
+            exit 1;
+          fi
+
+          OWNER=$(echo "$REPO" | cut -d'/' -f1)
+          REPO_NAME=$(echo "$REPO" | cut -d'/' -f2)
+          if [ -n "$SERVICE_NAME_INPUT" ]; then
+            SERVICE_NAME="$SERVICE_NAME_INPUT"
+          else
+            SERVICE_NAME="${REPO_NAME}-render"
+          fi
+
+          echo "Creating Render service '$SERVICE_NAME' for repo $REPO on branch $BRANCH"
+
+          # Build minimal JSON body for a Python web service
+          read -r -d '' PAYLOAD <<EOF || true
+{
+  "name": "$SERVICE_NAME",
+  "repo": "https://github.com/$OWNER/$REPO_NAME",
+  "branch": "$BRANCH",
+  "type": "web_service",
+  "env": "python",
+  "plan": "starter",
+  "buildCommand": "pip install -r requirements.txt",
+  "startCommand": "gunicorn Epilepsy_project.wsgi --log-file -"
+}
+EOF
+
+          echo "Payload:"
+          echo "$PAYLOAD"
+
+          RESP=$(curl -s -X POST \
+            -H "Authorization: Bearer $RENDER_API_KEY" \
+            -H "Content-Type: application/json" \
+            -d "$PAYLOAD" \
+            https://api.render.com/v1/services || true)
+
+          echo "Render response: $RESP"
+
+          # Try to extract id
+          SERVICE_ID=$(echo "$RESP" | jq -r '.id // .serviceId // empty') || true
+          if [ -n "$SERVICE_ID" ]; then
+            echo "SERVICE_ID=$SERVICE_ID"
+            echo "Service created. Please add this value as the repository secret RENDER_SERVICE_ID and remove the temporary RENDER_API_KEY_FOR_CREATE secret."
+          else
+            echo "Failed to create service automatically. Inspect response above and consider creating the service via Render UI."
+            exit 1
+          fi
