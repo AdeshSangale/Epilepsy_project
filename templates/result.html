@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Epilepsy Prediction Result</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-image: url('https://www.myheart.org.sg/wp-content/uploads/2019/04/Diabetes-and-Heart-Disease_-Whats-the-Connection_-scaled.jpg');
+            background-size: cover;
+            background-position: center;
+            color: #fff;
+        }
+        .navbar {
+            background: rgba(0, 0, 0, 0.8);
+        }
+        .navbar a {
+            color: #ffcc00 !important;
+        }
+        .navbar a:hover {
+            color: #e6b800 !important;
+        }
+        .card {
+            background: rgba(0, 0, 0, 0.8);
+            border: none;
+            border-radius: 15px;
+            margin-top: 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+        }
+        .card-header {
+            background: #ffcc00;
+            color: #333;
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
+            text-align: center;
+            font-weight: bold;
+        }
+        .result-title {
+            font-size: 2.5rem;
+            color: #ffcc00;
+            text-align: center;
+        }
+        .result-message {
+            font-size: 1.5rem;
+            color: #fff;
+            text-align: center;
+        }
+        footer {
+            background: rgba(0, 0, 0, 0.9);
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+        }
+        footer a {
+            color: #ffcc00;
+        }
+        footer a:hover {
+            color: #e6b800;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg">
+        <a class="navbar-brand" href="#">Epilepsy Prediction</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Welcome to {{user.username}}!</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/predict">Predict</a>
+                </li>
+                {% comment %} <li class="nav-item">
+                    <a class="nav-link" href="/logout1">Logout</a>
+                </li> {% endcomment %}
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Form Container -->
+    <div class="container py-5">
+        <div class="card mb-4">
+            <div class="card-header">
+                <h4 class="result-title">Epilepsy Disease Prediction Output</h4>
+            </div>
+            <div class="card-body p-5">
+                <div class="result-message">
+                    <h1>Prediction: {{ ans }}</h1>
+                    <hr>
+                    {% if ans == "Transition" %}
+                        <p style="color: #e6b800;">Epilepsy Disease is Predicted.</p>
+                        <p>Precautions to Take:</p>
+                        <ul>
+                            <li>Consult with a healthcare provider for further evaluation.</li>
+                            <li>Implement lifestyle changes, including a balanced diet and regular exercise.</li>
+                            <li>Monitor your blood sugar levels regularly.</li>
+                            <li>Consider medication as advised by your healthcare provider.</li>
+                        </ul>
+                        <p>Home Remedies:</p>
+                        <ul>
+                            <li>Incorporate omega-3 fatty acids into your diet, found in fish like salmon and walnuts.</li>
+                            <li>Practice stress-reducing techniques such as yoga or meditation.</li>
+                            <li>Ensure adequate sleep and a consistent sleep schedule.</li>
+                        </ul>
+                    {% elif ans == "Healthy" %}
+                        <p style="color: #e6b800;">You are Predicted to be Healthy.</p>
+                        <p>Precautions to Maintain Health:</p>
+                        <ul>
+                            <li>Continue to maintain a healthy lifestyle.</li>
+                            <li>Incorporate regular physical activity into your routine.</li>
+                            <li>Eat a balanced diet rich in whole foods and low in processed sugars.</li>
+                            <li>Schedule regular check-ups with your healthcare provider.</li>
+                        </ul>
+                        <p>Home Remedies:</p>
+                        <ul>
+                            <li>Stay hydrated with plenty of water throughout the day.</li>
+                            <li>Incorporate antioxidant-rich foods like berries and leafy greens.</li>
+                            <li>Practice regular mindfulness and relaxation techniques.</li>
+                        </ul>
+                    {% elif ans == "Seizures" %}
+                        <p style="color: #e6b800;">Seizures Detected.</p>
+                        <p>Precautions to Take:</p>
+                        <ul>
+                            <li>Seek immediate medical attention from a healthcare professional.</li>
+                            <li>Avoid triggers that could lead to seizures, such as lack of sleep or stress.</li>
+                            <li>Follow the medication regimen prescribed by your healthcare provider.</li>
+                            <li>Educate yourself and your family about seizure management and first aid.</li>
+                        </ul>
+                        <p>Home Remedies:</p>
+                        <ul>
+                            <li>Consider a ketogenic diet under medical supervision, as it may help some individuals.</li>
+                            <li>Use essential oils such as lavender for calming effects.</li>
+                            <li>Maintain a healthy sleep routine to reduce seizure risk.</li>
+                        </ul>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Epilepsy Prediction. All rights reserved.</p>
+            <p><a href="/privacy-policy">Privacy Policy</a> | <a href="/terms">Terms of Service</a></p>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

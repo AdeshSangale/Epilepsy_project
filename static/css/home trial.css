@@ -1,0 +1,125 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-image: url("{% static 'images/1.webp' %}");
+    background-size: cover;
+    background-position: center;
+    color: #fff;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+
+/* Header */
+
+header {
+    width: 100%;
+    padding: 20px 0;
+    background: rgba(0, 0, 0, 0.6);
+    text-align: center;
+}
+
+.logo {
+    font-size: 32px;
+    font-weight: bold;
+    color: #fff;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.menu a,
+.register a {
+    text-decoration: none;
+    color: #fff;
+    margin: 0 15px;
+    font-size: 18px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.menu a:hover,
+.register a:hover {
+    color: #ffcc00;
+}
+
+.menu {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.register a {
+    background-color: #ffcc00;
+    padding: 10px 20px;
+    border-radius: 30px;
+    color: #333;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.register a:hover {
+    background-color: #ff9900;
+}
+
+
+/* Hero Section */
+
+.h-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 60%;
+    text-align: center;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+    padding: 30px;
+}
+
+.h-text h1 {
+    font-size: 48px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    color: #ffcc00;
+}
+
+.h-text a {
+    padding: 15px 30px;
+    background-color: #ffcc00;
+    color: #333;
+    font-size: 18px;
+    font-weight: 600;
+    border-radius: 30px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.h-text a:hover {
+    background-color: #ff9900;
+    color: #fff;
+}
+
+footer {
+    text-align: center;
+    padding: 20px 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: #fff;
+    font-size: 14px;
+}
