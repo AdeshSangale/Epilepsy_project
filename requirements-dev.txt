@@ -1,0 +1,12 @@
+Django==6.0
+asgiref==3.11.0
+sqlparse==0.5.5
+tzdata==2025.3
+python-dotenv==1.0.0
+dj-database-url==1.0.0
+whitenoise==6.5.0
+
+# NOTE: `psycopg2-binary` and `gunicorn` are omitted from dev requirements
+# because they commonly require platform-specific wheels or build tools.
+# Install them in production environment or using the appropriate Python
+# runtime (e.g., Linux / Docker) or enable GitHub Actions to run deployments.
