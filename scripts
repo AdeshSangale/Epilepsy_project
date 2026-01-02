@@ -1,0 +1,9 @@
+param(
+  [string]$UrlsFile = 'datasets_urls.txt',
+  [string]$OutDir = 'Datasets'
+)
+
+# PowerShell wrapper — invokes the Python downloader
+$python = Get-Command python -ErrorAction SilentlyContinue
+if (-not $python) { Write-Error 'Python not found in PATH. Please install Python 3 and try again.'; exit 1 }
+& $python.Path "scripts/download_datasets.py" $UrlsFile $OutDir

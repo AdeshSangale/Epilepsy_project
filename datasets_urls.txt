@@ -1,0 +1,8 @@
+# datasets_urls.txt - placeholder for direct-download links (one per line)
+# Replace the sample lines below with actual direct download URLs to your dataset files.
+# Example:
+# https://example-bucket.s3.amazonaws.com/setB/O001.txt
+# https://drive.google.com/uc?export=download&id=FILE_ID  # (Google Drive direct download variant)
+
+# Add your URLs below:
+
