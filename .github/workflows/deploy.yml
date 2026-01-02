@@ -34,6 +34,7 @@ jobs:
           python manage.py collectstatic --noinput
 
       - name: Deploy to Heroku
+        if: ${{ secrets.HEROKU_API_KEY && secrets.HEROKU_APP_NAME }}
         uses: akhileshns/heroku-deploy@v3.12.12
         with:
           heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
@@ -41,6 +42,7 @@ jobs:
           heroku_email: ${{ secrets.HEROKU_EMAIL }}
 
       - name: Trigger Render deploy
+        if: ${{ secrets.RENDER_API_KEY && secrets.RENDER_SERVICE_ID }}
         env:
           RENDER_API_KEY: ${{ secrets.RENDER_API_KEY }}
           RENDER_SERVICE_ID: ${{ secrets.RENDER_SERVICE_ID }}
