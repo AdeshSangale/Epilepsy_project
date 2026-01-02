@@ -1,0 +1,124 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Epilepsy Prediction System</title>
+    <link rel="stylesheet" href="{% static 'css/home trial.css' %}">
+    <style>
+        body {
+            background-image: url("{% static 'images/1.webp' %}");
+            background-size: cover;
+            background-position: center;
+            color: #fff;
+            font-family: 'Arial', sans-serif;
+        }
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.7);
+            position: relative;
+        }
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+        .menu a {
+            color: #ffcc00;
+            text-decoration: none;
+            margin: 0 15px;
+            transition: color 0.3s;
+        }
+        .menu a:hover {
+            color: #e6b800;
+        }
+        .register a {
+            margin-left: 10px;
+        }
+        .register .btn-register {
+            background: #28a745; /* Green for Register */
+            color: white;
+            padding: 10px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background 0.3s;
+        }
+        .register .btn-register:hover {
+            background: #218838; /* Darker green on hover */
+        }
+        .register .btn-login {
+            background: #007bff; /* Blue for Login */
+            color: white;
+            padding: 10px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background 0.3s;
+            margin-left: 10px;
+        }
+        .register .btn-login:hover {
+            background: #0056b3; /* Darker blue on hover */
+        }
+        .h-text {
+            text-align: center;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
+        }
+        .h-text h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+        .h-text a {
+            background: #ffcc00;
+            padding: 10px 20px;
+            border-radius: 5px;
+            color: #333;
+            font-weight: bold;
+            text-decoration: none;
+            transition: background 0.3s;
+        }
+        .h-text a:hover {
+            background: #e6b800;
+        }
+        footer {
+            text-align: center;
+            padding: 15px 0;
+            background: rgba(0, 0, 0, 0.8);
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav> 
+            <div class="logo">
+                Epilepsy Prediction System
+            </div>
+            <div class="menu">
+                <a href="#">Home</a>
+                <a href="about">About Us</a>
+                {% comment %} <a href="#">Contact</a> {% endcomment %}
+            </div>
+            <div class="register">
+                <a class="btn-register" href="/register">Register</a>
+                <a class="btn-login" href="/login_view">Login</a>
+            </div>
+        </nav>
+        <section class="h-text">
+            <h1>Epilepsy Prediction System</h1>
+            <a href="#">Get Started</a>
+        </section>
+    </header>
+    <footer>
+        <p>&copy; 2024 Epilepsy Prediction System. All Rights Reserved.</p>
+    </footer>
+</body>
+</html>
